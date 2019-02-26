@@ -5,7 +5,7 @@ import { ApolloLink } from "apollo-link";
 
 import { typeDefs, defaults, resolvers } from "./clientState";
 
-const cache = new InMemoryCache();
+const cache = new InMemoryCache({ addTypename: true });
 
 const stateLink = withClientState({
   cache,

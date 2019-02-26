@@ -1,6 +1,6 @@
 import { createGlobalStyle } from "styled-components";
 
-createGlobalStyle`
+export const GlobalStyle = createGlobalStyle`
     :root {
         --greyColor: #A2A19E;
         --blackColor: #373630;
@@ -13,7 +13,7 @@ createGlobalStyle`
         margin:0;
     }
     #root{
-        max-width:1000px;
+        max-width:80vw;
         width:100%;
         margin:0 auto;
     }
