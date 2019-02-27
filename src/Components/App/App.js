@@ -8,7 +8,7 @@ import Edit from "../../Routes/Edit";
 class App extends Component {
   render() {
     return (
-      <BrowserRouter>
+      <BrowserRouter basename="/sseops-note">
         <Switch>
           <Route exact={true} path={"/"} component={Notes} />
           <Route path={"/add"} component={Add} />

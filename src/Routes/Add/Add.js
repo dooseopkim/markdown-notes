@@ -4,8 +4,9 @@ import gql from "graphql-tag";
 import Editor from "../../Components/Editor";
 
 const CREATE_NOTE = gql`
-  mutation createNote($title: String!, $content: String!) @client {
-    createNote(title: $title, content: $content) {
+  mutation createNote($title: String!, $content: String!, $createAt: String!, $del: Boolean!)
+    @client {
+    createNote(title: $title, content: $content, createAt: $createAt, del: $del) {
       id
     }
   }
@@ -26,8 +27,10 @@ export default class Add extends React.Component {
     const {
       history: { push }
     } = this.props;
+    const createAt = String(Date.now());
+    const del = false;
     if (title !== "" && content !== "") {
-      this.createNote({ variables: { title, content } });
+      this.createNote({ variables: { title, content, createAt, del } });
       push("/");
     }
   };

@@ -7,6 +7,7 @@ const TitleInput = styled(TextareaAutosize)`
   font-size: 50px;
   font-weight: 600;
   width: 100%;
+  border-bottom: 2px solid darkgray;
   &::placeholder {
     font-weight: 600;
   }
@@ -37,7 +38,8 @@ export default class Editor extends React.Component {
     this.state = {
       title: props.title || "",
       content: props.content || "",
-      id: props.id || null
+      id: props.id || null,
+      del: props.del || false
     };
   }
   render() {
@@ -52,6 +54,7 @@ export default class Editor extends React.Component {
             name={"title"}
           />
           <Button onClick={this._onSave}>Save</Button>
+          <Button onClick={this._onDelete}>Delete</Button>
         </TitleContainer>
         <ContentPreview>
           <ContentInput
@@ -77,5 +80,10 @@ export default class Editor extends React.Component {
     const { onSave } = this.props;
     const { title, content, id } = this.state;
     onSave(title, content, id);
+  };
+  _onDelete = () => {
+    const { onDelete } = this.props;
+    const { id, del } = this.state;
+    del ? console.log("del fail") : onDelete(del, id);
   };
 }

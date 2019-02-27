@@ -46,7 +46,9 @@ export const GlobalStyle = createGlobalStyle`
         border:none;
         background-color:transparent;
         font-weight:600;
-        font-size:15px;
+        font-size:1.5rem;
+        padding: 10px 20px;
+        margin-left: 10px;
         cursor:pointer;
         border:2.5px solid var(--blackColor);
         &:focus,

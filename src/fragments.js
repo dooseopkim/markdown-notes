@@ -5,5 +5,7 @@ export const NOTE_FRAGMENT = gql`
     id
     title
     content
+    createAt
+    del
   }
 `;

@@ -16,13 +16,16 @@ export const typeDefs = [
         note(id: Int!): Note
     }
     type Mutation{
-        createNote(title: String!, content: String!):Note
+        createNote(title: String!, content: String!, createAt: String!, del: Boolean!):Note
         editNote(id: Int!, title: String!, content: String!):Note
+        delNote(id: Int!, del: Boolean!):Note
     }
     type Note{
         id: Int!
         title: String!
         content: String!
+        createAt: String!
+        del: Boolean!
     }
 `
 ];
@@ -41,11 +44,13 @@ export const resolvers = {
   Mutation: {
     createNote: (_, variables, { cache }) => {
       const { notes } = cache.readQuery({ query: GET_NOTES });
-      const { title, content } = variables;
+      const { title, content, createAt, del } = variables;
       const newNote = {
         __typename: "Note",
         title,
         content,
+        createAt,
+        del,
         id: notes.length + 1
       };
       cache.writeData({
@@ -74,6 +79,24 @@ export const resolvers = {
       });
       saveNotes(cache);
       return updateNote;
+    },
+    delNote: (_, { id, del }, { cache }) => {
+      const noteDelId = cache.config.dataIdFromObject({
+        __typename: "Note",
+        id
+      });
+      const note = cache.readFragment({ fragment: NOTE_FRAGMENT, id: noteDelId });
+      const delNote = {
+        ...note,
+        del
+      };
+      cache.writeFragment({
+        id: noteDelId,
+        fragment: NOTE_FRAGMENT,
+        data: delNote
+      });
+      saveNotes(cache);
+      return delNote;
     }
   }
 };

@@ -12,6 +12,14 @@ export const EDIT_NOTE = gql`
   }
 `;
 
+export const DEL_NOTE = gql`
+  mutation delNote($id: Int!, $del: Boolean!) {
+    delNote(id: $id, del: $del) @client {
+      id
+    }
+  }
+`;
+
 export default class Edit extends React.Component {
   render() {
     const {
@@ -24,17 +32,24 @@ export default class Edit extends React.Component {
         {({ data }) =>
           data.note ? (
             <Mutation mutation={EDIT_NOTE}>
-              {editNote => {
-                this.editNote = editNote;
-                return (
-                  <Editor
-                    title={data.note.title}
-                    content={data.note.content}
-                    id={data.note.id}
-                    onSave={this._onSave}
-                  />
-                );
-              }}
+              {({ editNote }) => (
+                <Mutation mutation={DEL_NOTE}>
+                  {delNote => {
+                    this.editNote = editNote;
+                    this.delNote = delNote;
+                    return (
+                      <Editor
+                        title={data.note.title}
+                        content={data.note.content}
+                        id={data.note.id}
+                        del={data.note.del}
+                        onSave={this._onSave}
+                        onDelete={this._onDelete}
+                      />
+                    );
+                  }}
+                </Mutation>
+              )}
             </Mutation>
           ) : null
         }
@@ -47,6 +62,16 @@ export default class Edit extends React.Component {
     } = this.props;
     if (title !== "" && content !== "" && id) {
       this.editNote({ variables: { title, content, id } });
+      push("/");
+    }
+  };
+  _onDelete = (del, id) => {
+    const {
+      history: { push }
+    } = this.props;
+    if (!del && id) {
+      del = !del;
+      this.delNote({ variables: { del, id } });
       push("/");
     }
   };
