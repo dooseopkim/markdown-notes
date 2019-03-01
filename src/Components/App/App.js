@@ -4,16 +4,18 @@ import Notes from "../../Routes/Notes";
 import Note from "../../Routes/Note";
 import Add from "../../Routes/Add";
 import Edit from "../../Routes/Edit";
+import Delete from "../../Routes/Delete";
 
 class App extends Component {
   render() {
     return (
-      <BrowserRouter basename="/sseops-note">
+      <BrowserRouter>
         <Switch>
           <Route exact={true} path={"/"} component={Notes} />
           <Route path={"/add"} component={Add} />
           <Route path={"/note/:id"} component={Note} />
           <Route path={"/edit/:id"} component={Edit} />
+          <Route path={"/delete/:id"} component={Delete} />
         </Switch>
       </BrowserRouter>
     );

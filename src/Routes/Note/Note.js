@@ -8,16 +8,17 @@ import { GET_NOTE } from "../../queries";
 const TitleComponent = styled.div`
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
   margin-bottom: 50px;
 `;
 
 const Title = styled.h1`
+  flex: 5;
   font-size: 50px;
   margin: 0;
   padding: 0;
+  align-self: flex-start;
 `;
-
 const Button = styled.button``;
 
 export default class Note extends React.Component {
@@ -35,7 +36,10 @@ export default class Note extends React.Component {
               <TitleComponent>
                 <Title>{data.note && data.note.title}</Title>
                 <Link to={`/edit/${data.note.id}`}>
-                  <Button>Edit</Button>
+                  <Button> Edit </Button>
+                </Link>
+                <Link to={`/delete/${data.note.id}`}>
+                  <Button>Delete</Button>
                 </Link>
               </TitleComponent>
               <MarkdownRenderer markdown={data.note.content} />
