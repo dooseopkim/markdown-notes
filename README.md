@@ -13,3 +13,11 @@ yarn add apollo-cache-inmemory apollo-client apollo-link-state graphql graphql-t
 ```
 yarn add react-router-dom
 ```
+URL : http://sseopstory.tk/sseops-note/  
+* DB없이 cache와 localStorage만을 사용하기 때문에 개개인이 가볍게 쓸 수 있습니다.  
+### 메인 화면
+![image](https://user-images.githubusercontent.com/34496143/57508230-e7c19900-733b-11e9-927c-e97d559e0fc9.png)
+&nbsp;  
+### 작성 화면
+![image](https://user-images.githubusercontent.com/34496143/57508370-4e46b700-733c-11e9-9af6-a9f40115c5f5.png)
+
